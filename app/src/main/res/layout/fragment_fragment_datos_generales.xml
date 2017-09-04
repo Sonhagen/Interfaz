@@ -1,0 +1,270 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        style="@style/LayOutE"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/button_shape"
+        tools:context="layout.fragment_datos_generales">
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/OP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:id="@+id/TVL_OP" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_OP"
+            android:layout_alignTop="@id/TVL_OP"
+            android:layout_toEndOf="@id/TVL_OP"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Lote"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/TV_OP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Lote" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Lote"
+            android:layout_alignTop="@id/TVL_Lote"
+            android:layout_toEndOf="@id/TVL_Lote"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Pedido"
+            android:layout_toEndOf="@id/TV_Lote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:id="@+id/TVL_Pedido" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Pedido"
+            android:layout_alignTop="@id/TVL_Pedido"
+            android:layout_toEndOf="@id/TVL_Pedido"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/FechaCap"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/TVL_OP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_FCap" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_FCap"
+            android:layout_alignTop="@id/TVL_FCap"
+            android:layout_toEndOf="@id/TVL_FCap"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/FechaLlg"
+            android:layout_marginStart="20dp"
+            android:layout_alignTop="@id/TV_FCap"
+            android:layout_toEndOf="@id/TV_FCap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Flle" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Flle"
+            android:layout_alignTop="@id/TVL_Flle"
+            android:layout_toEndOf="@id/TVL_Flle"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Marca"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/TVL_FCap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Marca" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Marca"
+            android:layout_alignTop="@id/TVL_Marca"
+            android:layout_toEndOf="@id/TVL_Marca"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Familia"
+            android:layout_marginStart="20dp"
+            android:layout_alignTop="@id/TV_Marca"
+            android:layout_toEndOf="@id/TV_Marca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Fam" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_fam"
+            android:layout_alignTop="@id/TVL_Fam"
+            android:layout_toEndOf="@id/TVL_Fam"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Linea"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/TVL_Marca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Line" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Line"
+            android:layout_alignTop="@id/TVL_Line"
+            android:layout_toEndOf="@id/TVL_Line"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Colecc"
+            android:layout_marginStart="20dp"
+            android:layout_alignTop="@id/TV_Line"
+            android:layout_toEndOf="@id/TV_Line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Col" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Col"
+            android:layout_alignTop="@id/TVL_Col"
+            android:layout_toEndOf="@id/TVL_Col"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Acc"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/TVL_Line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Acc" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Acc"
+            android:layout_alignTop="@id/TVL_Acc"
+            android:layout_toEndOf="@id/TVL_Acc"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Control"
+            android:layout_marginStart="20dp"
+            android:layout_alignTop="@id/TVL_Acc"
+            android:layout_toEndOf="@id/TV_Acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Cont" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Cont"
+            android:layout_alignTop="@id/TVL_Cont"
+            android:layout_toEndOf="@id/TVL_Cont"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Color"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/TVL_Acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Color" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Color"
+            android:layout_alignTop="@id/TVL_Color"
+            android:layout_toEndOf="@id/TVL_Color"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Ancho"
+            android:layout_marginStart="20dp"
+            android:layout_alignTop="@id/TV_Color"
+            android:layout_toEndOf="@id/TV_Color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Ancho" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Ancho"
+            android:layout_alignTop="@id/TVL_Ancho"
+            android:layout_toEndOf="@id/TVL_Ancho"/>
+
+        <TextView
+            style="@style/TextosDG"
+            android:text="@string/Alto"
+            android:layout_marginStart="20dp"
+            android:layout_alignTop="@id/TV_Ancho"
+            android:layout_toEndOf="@id/TV_Ancho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TVL_Alto" />
+
+        <TextView
+            style="@style/TextosDG"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TV_Alto"
+            android:layout_alignTop="@id/TVL_Alto"
+            android:layout_toEndOf="@id/TVL_Alto"/>
+
+    </RelativeLayout>
+</ScrollView>

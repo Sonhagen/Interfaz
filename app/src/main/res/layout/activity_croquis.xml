@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LayOut"
+    android:orientation="vertical"
+    android:id="@+id/activity_croquis"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.gcubos.android.interfaz.Croquis">
+
+    <RelativeLayout
+        style="@style/LayOut"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="0.4">
+
+    <EditText
+        style="@style/Textos"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/text_border"
+        android:layout_alignParentLeft="true"
+        android:hint="WCP"
+        android:id="@+id/ScanWCP" />
+
+    <ImageButton
+        style="@style/Botones"
+        android:layout_alignTop="@id/ScanWCP"
+        android:layout_alignParentRight="true"
+        android:onClick="onClickCroq"
+        android:enabled="false"
+        android:src="@drawable/ic_scan"
+        android:id="@+id/ScanCroq" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/ScanCroq"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/ViewSep"
+        android:background="@android:color/black" />
+
+    <FrameLayout
+        style="@style/LayOut"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/fragment_Croquis"
+        android:layout_weight="2.6"
+        android:layout_below="@id/ScanCroq" />
+
+</LinearLayout>
