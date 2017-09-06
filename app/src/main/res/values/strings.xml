@@ -11,7 +11,7 @@
     <string name="ExitCon">Esta seguro de que desea salir de la Consulta?"</string>
     <string name="ExitTlt">Salir"</string>
     <string name="OP">OP:"</string>
-    <string name="Lote">Lote:"</string>
+    <string name="Lote">Lote: "</string>
     <string name="Pedido">Pedido:"</string>
     <string name="FechaCap">Fecha Cap:"</string>
     <string name="FechaLlg">Fecha Lleg:"</string>
