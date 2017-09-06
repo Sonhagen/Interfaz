@@ -17,7 +17,7 @@ public class Secure_Convert extends AppCompatActivity {
         Secure = new AESHelper();
     }
 
-    
+
 
     public void onClickB1(View view){
         try {

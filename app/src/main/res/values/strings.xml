@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Interfaz</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="SelProc">Se debe seleccionar un proceso.</string>
+    <string name="NoData">La WCP no existe en el sistema!</string>
+    <string name="NoWCP">Se debe proporcionar una WCP!</string>
+    <string name="title_activity_login">Log In</string>
+    <string name="ExitMsg">Esta seguro de que desea salir de la aplicacion?"</string>
+    <string name="ExitTlt">Salir"</string>
+    <string name="OP">OP:"</string>
+    <string name="Lote">Lote:"</string>
+    <string name="Pedido">Pedido:"</string>
+    <string name="FechaCap">Fecha Cap:"</string>
+    <string name="FechaLlg">Fecha Lleg:"</string>
+    <string name="Marca">Marca: "</string>
+    <string name="Familia">Familia :"</string>
+    <string name="Linea">Linea: "</string>
+    <string name="Colecc">Coleccion:"</string>
+    <string name="Acc">Accionamiento:"</string>
+    <string name="Control">Control:"</string>
+    <string name="Color">Color:"</string>
+    <string name="Ancho">Ancho:"</string>
+    <string name="Alto">Alto:"</string>
+    <string name="HD">HUNTERDOUGLAS.MX</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Usuario</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">A c c e d e r</string>
+    <string name="action_sign_in_short">Log In</string>
+    <string name="error_invalid_email">Usuario o contraseña Invalidos</string>
+    <string name="error_incorrect_password">Usuario o contraseña Invalidos</string>
+    <string name="error_field_required">Campo requerido</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
