@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
     private void habilitaBotones(boolean Estado){
         //Habilita o deshabilita bortones
         ImageButton bscan = (ImageButton) findViewById(R.id.button1);
-        bscan.setEnabled(Estado);
+        bscan.setEnabled(Estado) ;
         if (!Estado){
             fadeOut(bscan) ;
         }
