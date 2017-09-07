@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
         ImageButton bscan = (ImageButton) findViewById(R.id.button1);
         bscan.setEnabled(Estado);
         if (!Estado){
-            fadeOut(bscan);
+            fadeOut(bscan) ;
         }
         else{
-            fadeIn(bscan);
+            fadeIn(bscan) ;
         }
     }
 
