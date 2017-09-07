@@ -157,7 +157,8 @@ public class LoginActivity extends AppCompatActivity {
                             contentTxt.setError(null);
                             showProgress(false);
                             habilitaBotones(true);
-                            Intent actIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            //Intent actIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent actIntent = new Intent(getApplicationContext(), NavActivity.class);
                             //Bundle para enviar los parametros
                             Bundle bundle = new Bundle();
                             bundle.putString("Usuario",contentTxt.getText().toString());
@@ -196,6 +197,7 @@ public class LoginActivity extends AppCompatActivity {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -223,6 +225,5 @@ public class LoginActivity extends AppCompatActivity {
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
-
 }
 

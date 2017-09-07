@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/LayOut"
@@ -13,12 +12,13 @@
     <Spinner
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         android:id="@+id/spinner"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dropdown" />
 
     <TextView
         style="@style/TextosS"
-        android:layout_width="94dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/spinner"
@@ -38,10 +38,10 @@
 
     <ImageButton
         android:src="@drawable/ic_upload"
-        android:contentDescription="Despegar datos."
+        android:contentDescription="Desplegar datos."
         style="@style/Botones"
         android:layout_below="@id/spinner"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:onClick="onClickButton2"
         android:enabled="false"
         android:id="@+id/button2"
@@ -51,7 +51,8 @@
         android:contentDescription="Escanear codigo de barras."
         style="@style/Botones"
         android:layout_below="@id/spinner"
-        android:layout_alignParentRight="true"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_alignParentEnd="true"
         android:onClick="onClickButton1"
         android:enabled="false"
         android:src="@drawable/ic_scan"
@@ -68,6 +69,7 @@
 
     <FrameLayout
         style="@style/LayOut"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:id="@+id/sample_content_fragment"
         android:layout_weight="2"
         android:layout_below="@id/ViewSep" />

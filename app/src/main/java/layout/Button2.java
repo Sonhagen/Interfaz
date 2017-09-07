@@ -56,6 +56,8 @@ public class Button2 extends Fragment {
         JSONArray JORenglones;
         JSONObject JOE;
         String strCadena = getArguments().getString("cadena");
+        int textSize = R.style.TextosE;
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_button2, container, false);
         //Recorre JsonArray con los renglones y genera los TextView dinamicos
@@ -67,7 +69,7 @@ public class Button2 extends Fragment {
                 JOE = JORenglones.getJSONObject(i);
                 View LayOutE = view.findViewById(R.id.LayOutDetalle);
                 TextView Paper = new TextView(LayOutE.getContext());
-                Paper.setTextSize(12);
+                Paper.setTextSize(15);
                 Paper.setTextColor(Color.BLACK);
                 Paper.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                 Paper.setText(JOE.getString("@cadena"));

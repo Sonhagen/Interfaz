@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
     Mail SeMail;
     private boolean userIsInteracting;
     private String usuario = "";
+    private boolean bDesdeTexto = false;
 
     private void habilitaBotones(boolean Estado){
         //Habilita o deshabilita bortones
@@ -75,12 +77,12 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(bView, "alpha", 0f, 1f);
         objectAnimator.setDuration(500L);
         objectAnimator.addListener(new AnimatorListenerAdapter() {
-            /*
+
+        });            /*
             @Override
             public void onAnimationEnd(Animator animation) {
                 fadeOut();
             }*/
-        });
         objectAnimator.start();
     }
 
@@ -115,6 +117,21 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+            //Si la WCP es digitada
+            EditText contentTxt = (EditText) findViewById(R.id.EditTScan);
+            contentTxt.setOnKeyListener(new View.OnKeyListener() {
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        EditText contentTxt = (EditText) findViewById(R.id.EditTScan);
+                        bDesdeTexto=true;
+                        onClickButton1(v);
+                        RecuperaDatos(contentTxt.getText().toString());
+                        bDesdeTexto=false;
+                        return true;
+                    }
+                    return false;
+                }
+            });
 
             //Recupera usuario de actividad LogIn
             Bundle extras = getIntent().getExtras();
@@ -191,9 +208,11 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
 
     public void onClickButton1(View view){
         try{
-            //Limpia Campo WCP
-            EditText contentTxt = (EditText) findViewById(R.id.EditTScan);
-            contentTxt.setText("");
+            if (!bDesdeTexto) {
+                //Limpia Campo WCP
+                EditText contentTxt = (EditText) findViewById(R.id.EditTScan);
+                contentTxt.setText("");
+            }
             //Limpia Estado
             TextView TVEstado = (TextView) findViewById(R.id.TVEstado);
             TVEstado.setText("");
@@ -205,13 +224,16 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
             if(!spinner.getSelectedItem().toString().trim().equals("") ) {
                 //Deshabilita botones antes de actividad asincrona
                 habilitaBotones(false);
-                //Integra Scanner
-                IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-                scanIntegrator.initiateScan();
+                if (!bDesdeTexto) {
+                    //Integra Scanner
+                    IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+                    scanIntegrator.initiateScan();
+                }
             }else {
                 //No hay proceso
                 Toast.makeText(getApplicationContext(),R.string.SelProc, Toast.LENGTH_SHORT).show();
             }
+            bDesdeTexto=false;
         }catch (Exception e){
             SendError(e, "Error. onClickButton1 MainActivity");
         }
@@ -223,44 +245,8 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
             IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
             EditText contentTxt = (EditText)findViewById(R.id.EditTScan);
             if (scanningResult != null) {
-                //Hashmap paramentros para el WebService
-                HashMap<String, String> HP = new HashMap<>();
-                //Deshabilita botones antes de actividad asincrona
-                //habilitaBotones(false);
-                //Recupera codigo escaneado
                 String scanContent = scanningResult.getContents();
-                //spinner y editview para los paramentros en HP
-                Spinner spinner = (Spinner) findViewById(R.id.spinner);
-                //Asigna WCP escaneada a TextView en pantalla
-                contentTxt.setText(scanContent);
-                HP.put("URL",DB.getURL() + DB.getEtiTip());
-                HP.put("WCP",contentTxt.getText().toString());
-                HP.put("Tipo",spinner.getSelectedItem().toString().substring(0,1));
-                HP.put("Usuario",usuario);
-                //Inicia actividad asincrona web service
-                GetAsync async = (GetAsync) new GetAsync( new AsyncResponse() {
-                    @Override
-                    public void processFinish(JSONObject json) {
-                        //Limpia Holder para rescatar dato de clase anonima
-                        mutableMessage.setValue("");
-                        EditText contentTxt = (EditText)findViewById(R.id.EditTScan);
-                        if (!json.toString().contains("Vacio")) {
-                            //Asigna dato de a clase anonima
-                            mutableMessage.setValue(json.toString());
-                            contentTxt.setError(null);
-                            ImageButton IBtn = (ImageButton)findViewById(R.id.button2);
-                            onClickButton2(IBtn);
-                        }else {
-                            //Toast.makeText(getApplicationContext(), R.string.NoData, Toast.LENGTH_SHORT).show();
-                            //Muestra error en WCP llego vacia o no existe
-                            contentTxt.setError(getText(R.string.NoData));
-                            //Limpia campo WCP llego vacia o no existe
-                            contentTxt.setText("");
-                        }
-                        //Habilita botones al terminar actividad asincrona
-                        habilitaBotones(true);
-                    }
-                },getApplicationContext()).execute(HP);
+                RecuperaDatos(scanContent);
             }
             else{
                 //Habilita botones al terminar actividad asincrona
@@ -274,11 +260,50 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
         }
     }
 
+    private void RecuperaDatos(String scanContent){
+        EditText contentTxt = (EditText)findViewById(R.id.EditTScan);
+        //Hashmap paramentros para el WebService
+        HashMap<String, String> HP = new HashMap<>();
+        //Deshabilita botones antes de actividad asincrona
+        //habilitaBotones(false);
+        //spinner y editview para los paramentros en HP
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        //Asigna WCP escaneada a TextView en pantalla
+        contentTxt.setText(scanContent);
+        HP.put("URL",DB.getURL() + DB.getEtiTip());
+        HP.put("WCP",contentTxt.getText().toString());
+        HP.put("Tipo",spinner.getSelectedItem().toString().substring(0,1));
+        HP.put("Usuario",usuario);
+        //Inicia actividad asincrona web service
+        GetAsync async = (GetAsync) new GetAsync( new AsyncResponse() {
+            @Override
+            public void processFinish(JSONObject json) {
+                //Limpia Holder para rescatar dato de clase anonima
+                mutableMessage.setValue("");
+                EditText contentTxt = (EditText)findViewById(R.id.EditTScan);
+                if (!json.toString().contains("Vacio")) {
+                    //Asigna dato de a clase anonima
+                    mutableMessage.setValue(json.toString());
+                    contentTxt.setError(null);
+                    ImageButton IBtn = (ImageButton)findViewById(R.id.button2);
+                    onClickButton2(IBtn);
+                }else {
+                    //Toast.makeText(getApplicationContext(), R.string.NoData, Toast.LENGTH_SHORT).show();
+                    //Muestra error en WCP llego vacia o no existe
+                    contentTxt.setError(getText(R.string.NoData));
+                    //Limpia campo WCP llego vacia o no existe
+                    contentTxt.setText("");
+                }
+                //Habilita botones al terminar actividad asincrona
+                habilitaBotones(true);
+            }
+        },getApplicationContext()).execute(HP);
+    }
+
     public void onClickButton2(View view){
         JSONObject JOEtiquetas;
         try{
             TextView TVEstado = (TextView) findViewById(R.id.TVEstado);
-
             EditText contentTxt = (EditText) findViewById(R.id.EditTScan);
             if (contentTxt.getText().length()>0) {
                 try {
@@ -299,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
                         fragmentTransaction.commit();
                     }else{
                         //Muestra error de flujo
-                        Toast.makeText(getApplicationContext(), JOEtiquetas.getString("@mensaje"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), JOEtiquetas.getString("@mensaje"), Toast.LENGTH_LONG).show();
                         TVEstado.setText("");
                     }
                 } catch (JSONException e){
@@ -307,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
                     e.printStackTrace();
                 }
             }else{
-                Toast.makeText(getApplicationContext(), R.string.NoWCP, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.NoWCP, Toast.LENGTH_LONG).show();
             }
         }catch (Exception e){
             SendError(e, "Error. onClickButton2 MainActivity");
@@ -334,6 +359,10 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
 
     }
 
+    private void BackStackcall(){
+        super.onBackPressed();
+    }
+
     @Override
     public void onBackPressed() {
         //Ultimo elemento en el BackStack pregunta antes de salir
@@ -342,12 +371,12 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle(getString(R.string.ExitTlt))
-                    .setMessage(getString(R.string.ExitMsg))
+                    .setMessage(getString(R.string.ExitEsc))
                     .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                         //Clase anonima para validar la respuesta positiva
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish();
+                            BackStackcall();
                         }
 
                     })
@@ -355,8 +384,8 @@ public class MainActivity extends AppCompatActivity implements Button2.OnFragmen
                     .setNegativeButton("No", null)
                     .show();
         }else{
-            //Si no es el ultimo en el BackStack, para a super con BaclPressed
-            super.onBackPressed();
+            //Si no es el ultimo en el BackStack, para a super con BackPressed
+            BackStackcall();
         }
     }
 }

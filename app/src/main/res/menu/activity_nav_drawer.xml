@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Escaneo"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Escaneo" />
+        <item
+            android:id="@+id/nav_WCPTodo"
+            android:icon="@drawable/ic_people_18px"
+            android:title="Consulta WCP Todo" />
+        <item
+            android:id="@+id/nav_WCPAct"
+            android:icon="@drawable/ic_person_18px"
+            android:title="Consulta WCP Act." />
+        <item
+            android:id="@+id/nav_Croquis"
+            android:icon="@drawable/ic_dashboard_48px"
+            android:title="Croquis" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>

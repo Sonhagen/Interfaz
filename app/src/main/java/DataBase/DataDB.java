@@ -4,9 +4,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import com.gcubos.android.interfaz.R;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import Secure.AESHelper;
 
 public class DataDB {
     private Context _context;
@@ -19,24 +21,31 @@ public class DataDB {
     private String _LogIn;
     private String _Tipos;
     private String _eDest;
-    private String _root;
-    private String _Droot;
+    private String _FLWCP;
+    private String _FWACT;
+    private String _CROQ;
+    AESHelper Secure;
 
     public DataDB(Context context) {
         _context = context;
+        Secure = new AESHelper();
         CargaDatos(_context);
+    }
+
+    private void setFWACT(String _sFWACT) {
+        this._FWACT = _sFWACT;
+    }
+
+    private void setCROQ(String _sCROQ) {
+        this._CROQ = _sCROQ;
+    }
+
+    private void setFLWCP(String _sFLWCP) {
+        this._FLWCP = _sFLWCP;
     }
 
     private void setURL(String _sURL) {
         this._URL = _sURL;
-    }
-
-    private void setRoot(String _sroot) {
-        this._root = _sroot;
-    }
-
-    private void setDRoot(String _sDroot) {
-        this._Droot = _sDroot;
     }
 
     private void setEtiTip(String _sEtiTip) {
@@ -71,48 +80,52 @@ public class DataDB {
         this._eDest = _seDest;
     }
 
+    public String getFWACT(){
+        return Secure.decrypt(_FWACT,_context.getString(R.string.HD));
+    }
+
+    public String getCROQ(){
+        return Secure.decrypt(_CROQ,_context.getString(R.string.HD));
+    }
+
+    public String getFLWCP(){
+        return Secure.decrypt(_FLWCP,_context.getString(R.string.HD));
+    }
+
     public String getURL(){
-        return _URL;
-    }
-
-    public String getRoot(){
-        return _root;
-    }
-
-    public String getDRoot(){
-        return _Droot;
+        return Secure.decrypt(_URL,_context.getString(R.string.HD));
     }
 
     public String geteDest(){
-        return _eDest;
+        return Secure.decrypt(_eDest,_context.getString(R.string.HD));
     }
 
     public String getLogIn(){
-        return _LogIn;
+        return Secure.decrypt(_LogIn,_context.getString(R.string.HD));
     }
 
     public String getTipos(){
-        return _Tipos;
+        return Secure.decrypt(_Tipos,_context.getString(R.string.HD));
     }
 
     public String getEtiTip(){
-        return _EtiTip;
+        return Secure.decrypt(_EtiTip,_context.getString(R.string.HD));
     }
 
     public String getSMTP(){
-        return _SMTP;
+        return Secure.decrypt(_SMTP,_context.getString(R.string.HD));
     }
 
     public String getUSER(){
-        return _USER;
+        return Secure.decrypt(_USER,_context.getString(R.string.HD));
     }
 
     public String getPASS(){
-        return _PASS;
+        return Secure.decrypt(_PASS,_context.getString(R.string.HD));
     }
 
     public String getPORT(){
-        return _PORT;
+        return Secure.decrypt(_PORT,_context.getString(R.string.HD));
     }
 
     private void CargaDatos(Context context){
@@ -128,17 +141,13 @@ public class DataDB {
             if (Conn.checkDataBase()) {
                 Conn.openDataBase();
                 SQLiteDatabase db = Conn.getReadableDatabase();
-                Cursor cur = db.rawQuery("select CAMPO, VALOR, VALORE from Params", null);
+                Cursor cur = db.rawQuery("select CAMPO, VALOR from Params", null);
                 cur.moveToFirst();
                 while (!cur.isAfterLast()) {
                     String strCampo = cur.getString(cur.getColumnIndex("CAMPO"));
                     switch (strCampo) {
                         case "URL":
                             this.setURL(cur.getString(cur.getColumnIndex("VALOR")));
-                            break;
-                        case "MESG":
-                            this.setRoot(cur.getString(cur.getColumnIndex("VALOR")));
-                            this.setDRoot(cur.getString(cur.getColumnIndex("VALORE")));
                             break;
                         case "ETITIP":
                             this.setEtiTip(cur.getString(cur.getColumnIndex("VALOR")));
@@ -163,6 +172,15 @@ public class DataDB {
                             break;
                         case "eDEST":
                             this.seteDest(cur.getString(cur.getColumnIndex("VALOR")));
+                            break;
+                        case "FLWCP":
+                            this.setFLWCP(cur.getString(cur.getColumnIndex("VALOR")));
+                            break;
+                        case "FWACT":
+                            this.setFWACT(cur.getString(cur.getColumnIndex("VALOR")));
+                            break;
+                        case "CROQ":
+                            this.setCROQ(cur.getString(cur.getColumnIndex("VALOR")));
                             break;
                     }
                     cur.moveToNext();

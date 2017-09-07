@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp">
 
-    <TextView
-        style="@style/TextosL"
-        android:id="@+id/textView_titulo"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center" />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/ImgSearch"
+            android:src="@drawable/ic_find_in_page"/>
+
+        <TextView
+            style="@style/TextosL"
+            android:id="@+id/textView_titulo"
+            android:layout_width="wrap_content"
+            android:layout_alignTop="@id/ImgSearch"
+            android:layout_height="40dp"
+            android:layout_toEndOf="@id/ImgSearch"
+            android:gravity="center" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ImgSearch"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_open_in_new"/>
+    </RelativeLayout>
 
 </LinearLayout>

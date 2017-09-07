@@ -14,8 +14,8 @@ import org.json.JSONObject;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 import eMail.Mail;
 
@@ -49,6 +49,7 @@ public class Button1 extends ListFragment  implements OnItemClickListener{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         SeMail = new Mail(getActivity().getApplicationContext());
+
         //Limpia arreglo de etiquetas
         Etiquetas.clear();
         String strCadena = getArguments().getString("cadena");
@@ -132,10 +133,10 @@ public class Button1 extends ListFragment  implements OnItemClickListener{
                 fragment = Button2.newInstance(strJson);
             }
             fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            //fragmentTransaction.setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
             //Remplaza Fragment con detalle
             fragmentTransaction.replace(R.id.sample_content_fragment, fragment);
-
             //Agrega BackStack
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
